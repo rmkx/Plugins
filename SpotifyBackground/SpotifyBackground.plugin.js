@@ -2,22 +2,22 @@
 * @name         SpotifyBackground
 * @description  Sets the spotify song cover as user card background.
 * @donate       https://bit.ly/3fnzq1Z
-* @source       asdf
+* @source       https://github.com/rmkx/Plugins/tree/main/SpotifyBackground
 * @author       rmkx
 * @invite       HnGWVQbQBv
-* @version      0.5
+* @version      1.0
 */
 
 const UserPopoutHeader = BdApi.findModule((m) => m?.default?.displayName === 'UserPopoutHeader');
 const UserPopoutInfo = BdApi.findModule((m) => m?.default?.displayName === 'UserPopoutInfo');
 
 
-const backgroundPatch = () => BdApi.Patcher.after('userPopoutHeader-patch', UserPopoutHeader, 'default', (that, args, value) => {
+const backgroundPatch = () => BdApi.Patcher.after('backgroundPatch', UserPopoutHeader, 'default', (that, args, value) => {
     const [props] = args;
-    let activityBackground;
+    let spotifyBackground;
     if (props.activity && props.activity.name === "Spotify") {
-        activityBackground = {
-            className: "activity-background",
+        spotifyBackground = {
+            className: "spotify-background",
             style: {
                 position: "absolute",
                 left: 0,
@@ -28,13 +28,13 @@ const backgroundPatch = () => BdApi.Patcher.after('userPopoutHeader-patch', User
                 zIndex: "0"
             }
         };
-        if(!props.user.bannerURL) { activityBackground.style.top = "60px" }
-        else { activityBackground.style.top = "120px" }
-        value.props.children.splice(1, 0, BdApi.React.createElement("div", activityBackground));
+        if(!props.user.bannerURL) { spotifyBackground.style.top = "60px" }
+        else { spotifyBackground.style.top = "120px" }
+        value.props.children.splice(1, 0, BdApi.React.createElement("div", spotifyBackground));
     }
 	return value;
 });
-const headerPatch = () => BdApi.Patcher.after('userInfo-patch', UserPopoutInfo, 'default', (that, args, value) => {
+const headerPatch = () => BdApi.Patcher.after('headerPatch', UserPopoutInfo, 'default', (that, args, value) => {
     const [props] = args;
     value.props.style = { background: "transparent", borderBottom: "none" };
     return value;
@@ -48,8 +48,8 @@ module.exports = class SpotifyBackground {
         headerPatch();
     }
     stop() {
-        BdApi.Patcher.unpatchAll('userPopoutHeader-patch');
-        BdApi.Patcher.unpatchAll('userInfo-patch');
+        BdApi.Patcher.unpatchAll('backgroundPatch');
+        BdApi.Patcher.unpatchAll('headerPatch');
     }
 
     observer(changes) { }
