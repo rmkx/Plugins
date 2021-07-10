@@ -37,7 +37,6 @@ const activityPatch = () => BdApi.Patcher.after("OpenInYoutube", UserActivity.pr
                 height: "25px",
                 background: "url(https://i.imgur.com/HFYpFVO.png) center/cover no-repeat"
             },
-            src: "https://rmkx.github.io/Plugins/OpenInYouTube/assets/youtubeIcon.svg",
             onClick: () => {
                 let songName = instance.props.activity.details.replace(/\s/g, "+").replace(/&/g, "%26");
                 let songArtist = "+" + instance.props.activity.state.replace(/\s/g, "+").replace(/;/g, "").replace(/&/g, "%26");
