@@ -36,8 +36,8 @@ const activityPatch = () => BdApi.Patcher.after("OpenInYoutube", UserActivity.pr
                 background: "url(https://i.imgur.com/HFYpFVO.png) center/cover no-repeat"
             },
             onClick: () => {
-                let songName = instance.props.activity.details.replace(/\s/g, "+").replace(/&/g, "%26");
-                let songArtist = "+" + instance.props.activity.state.replace(/\s/g, "+").replace(/;/g, "").replace(/&/g, "%26");
+                let songName = encodeURIComponent(instance.props.activity.details.replace(/;\s/g, " "));
+                let songArtist = "+" + encodeURIComponent(instance.props.activity.state.replace(/;\s/g, " "));
                 let url = "https://www.youtube.com/results?search_query=" + songName + songArtist;
                 window.open(url, '_blank');
             }
