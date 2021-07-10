@@ -1,11 +1,10 @@
 /**
 * @name         OpenInYouTube
-* @description  Allows you to search for Spotify songs in YouTube when clicking the song image.
-* @donate       https://bit.ly/3fnzq1Z
+* @description  Allows you to search for Spotify songs in YouTube.
 * @source       https://github.com/rmkx/Plugins/OpenInYouTube
 * @author       rmkx
 * @invite       HnGWVQbQBv
-* @version      1.0.1
+* @version      1.0
 * @updateUrl    https://raw.githubusercontent.com/rmkx/Plugins/main/OpenInYouTube/OpenInYouTube.plugin.js
 */
 
