@@ -27,14 +27,26 @@ const activityPatch = () => BdApi.Patcher.after("OpenInYoutube", UserActivity.pr
     const instance = that;
     const [props] = args;
     console.log("Instance: ", instance, "\nProps: ", props, "\nValue: ", value);
-    /*if (instance.props.activity && instance.props.activity.name === "Spotify") {
-        const image = value.props.children[1].props.children[0].props;
-        image.onClick = () => {
-            let songName = instance.props.activity.details.replace(/\s/g, "+");
-            let songArtist = "+" + instance.props.activity.state.replace(/\s/g, "+").replace(/;/g, "");
-            let url = "https://www.youtube.com/results?search_query=" + songName + songArtist;
-            window.open(url, '_blank');
+    if (instance.props.activity && instance.props.activity.name === "Spotify") {
+        const ytButton = {
+            className: "openInYouTube",
+            style: {
+                position: "absolute",
+                top: "-3px",
+                right: "25px",
+                width: "25px",
+                height: "25px",
+                background: "url(https://i.imgur.com/HFYpFVO.png) center/cover no-repeat"
+            },
+            src: "https://rmkx.github.io/Plugins/OpenInYouTube/assets/youtubeIcon.svg",
+            onClick: () => {
+                let songName = instance.props.activity.details.replace(/\s/g, "+").replace(/&/g, "%26");
+                let songArtist = "+" + instance.props.activity.state.replace(/\s/g, "+").replace(/;/g, "").replace(/&/g, "%26");
+                let url = "https://www.youtube.com/results?search_query=" + songName + songArtist;
+                window.open(url, '_blank');
+            }
         }
-    }*/
+        value.props.children.push(BdApi.React.createElement("button", ytButton));
+    }
     return value;
 });
