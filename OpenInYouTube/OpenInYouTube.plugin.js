@@ -5,7 +5,8 @@
 * @source       https://github.com/rmkx/Plugins/OpenInYouTube
 * @author       rmkx
 * @invite       HnGWVQbQBv
-* @version      1.0
+* @version      1.0.1
+* @updateUrl    https://raw.githubusercontent.com/rmkx/Plugins/main/OpenInYouTube/OpenInYouTube.plugin.js
 */
 
 module.exports = class OpenInYoutube {
@@ -25,8 +26,6 @@ module.exports = class OpenInYoutube {
 const UserActivity = BdApi.findModuleByDisplayName("UserActivity");
 const activityPatch = () => BdApi.Patcher.after("OpenInYoutube", UserActivity.prototype, "render", (that, args, value) => {
     const instance = that;
-    const [props] = args;
-    console.log("Instance: ", instance, "\nProps: ", props, "\nValue: ", value);
     if (instance.props.activity && instance.props.activity.name === "Spotify") {
         const ytButton = {
             className: "openInYouTube",
