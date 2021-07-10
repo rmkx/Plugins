@@ -5,7 +5,6 @@
 * @author       rmkx
 * @invite       HnGWVQbQBv
 * @version      1.0
-* @updateUrl    https://raw.githubusercontent.com/rmkx/Plugins/main/OpenInYouTube/OpenInYouTube.plugin.js
 */
 
 module.exports = class OpenInYoutube {
