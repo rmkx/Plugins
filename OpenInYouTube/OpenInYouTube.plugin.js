@@ -4,7 +4,7 @@
 * @source       https://github.com/rmkx/Plugins/OpenInYouTube
 * @author       rmkx
 * @invite       HnGWVQbQBv
-* @version      1.0
+* @version      1.0.1
 */
 
 module.exports = class OpenInYoutube {
@@ -35,6 +35,8 @@ const activityPatch = () => BdApi.Patcher.after("OpenInYoutube", UserActivity.pr
                 height: "25px",
                 background: "url(https://i.imgur.com/HFYpFVO.png) center/cover no-repeat"
             },
+            dataToggle: "tooltip",
+            title: "Search with YouTube",
             onClick: () => {
                 let songName = encodeURIComponent(instance.props.activity.details.replace(/;\s/g, " "));
                 let songArtist = "+" + encodeURIComponent(instance.props.activity.state.replace(/;\s/g, " "));
