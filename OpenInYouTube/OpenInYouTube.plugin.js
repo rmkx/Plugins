@@ -4,7 +4,7 @@
 * @source       https://github.com/rmkx/Plugins/OpenInYouTube
 * @author       rmkx
 * @invite       HnGWVQbQBv
-* @version      1.0.1
+* @version      1.0.2
 */
 
 module.exports = class OpenInYoutube {
@@ -29,11 +29,9 @@ const activityPatch = () => BdApi.Patcher.after("OpenInYoutube", UserActivity.pr
             className: "openInYouTube",
             style: {
                 position: "absolute",
-                top: "-3px",
-                right: "25px",
                 width: "25px",
                 height: "25px",
-                background: "url(https://i.imgur.com/HFYpFVO.png) center/cover no-repeat"
+                background: "url(https://i.imgur.com/HFYpFVO.png) center/cover no-repeat",
             },
             dataToggle: "tooltip",
             title: "Search with YouTube",
@@ -43,6 +41,21 @@ const activityPatch = () => BdApi.Patcher.after("OpenInYoutube", UserActivity.pr
                 let url = "https://www.youtube.com/results?search_query=" + songName + songArtist;
                 window.open(url, '_blank');
             }
+        }
+        switch (instance.props.type) {
+            case "Profile":
+                ytButton.style["top"] = "13px";
+                ytButton.style["right"] = "42px";
+                break;
+            case "VoiceChannel":
+                ytButton.style["top"] = "11px";
+                ytButton.style["right"] = "30px";
+                break;
+            case "UserPopout":
+            default:
+                ytButton.style["top"] = "-3px";
+                ytButton.style["right"] = "25px";
+                break;
         }
         value.props.children.push(BdApi.React.createElement("button", ytButton));
     }
